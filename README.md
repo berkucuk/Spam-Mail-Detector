@@ -1,77 +1,77 @@
 
-
 # Spam Email Classifier
 
-## Proje Amacı
+## Project Overview
 
-Bu proje, gelen e-postaların spam olup olmadığını tespit etmek için bir yapay zeka modelini kullanmaktadır. Bert dil modeli tabanlı bir derin öğrenme ağı kullanarak e-postaları sınıflandırır. Kullanıcıdan aldığı bir e-posta metnini analiz eder ve bu metnin **"Spam"** veya **"Not Spam"** olup olmadığını tahmin eder.
+This project is designed to classify emails as either **"Spam"** or **"Not Spam"** using a deep learning model based on BERT (Bidirectional Encoder Representations from Transformers). The model processes input email text and predicts whether the email is spam or not.
 
-## Özellikler
-- **Veri İşleme**: Metin verileri temizlenir, durak kelimeler (stopwords) ve noktalama işaretleri kaldırılır. Lemmatizasyon ile kelimelerin kök halleri elde edilir.
-- **BERT Modeli Kullanımı**: BERT dil modeli kullanılarak metinlerin anlamlı vektör temsilcileri çıkarılır ve sınıflandırma yapılır.
-- **Çapraz Doğrulama**: Modelin doğruluğunu test etmek için veri seti eğitim, doğrulama ve test bölümlerine ayrılır.
-- **Sonuçların Görselleştirilmesi**: Modelin sonuçları bir karışıklık matrisi ile görselleştirilir.
+## Features
 
-## Proje İçeriği
+- **Data Cleaning**: The email content is preprocessed, including converting text to lowercase, removing punctuation, stopwords, and applying lemmatization to extract word roots.
+- **BERT Model**: Uses a pre-trained BERT model to convert email text into meaningful vector representations.
+- **Cross-validation**: Splits the dataset into training, validation, and testing sets to evaluate the model's performance.
+- **Visualization**: Displays the model's performance using a confusion matrix.
 
-- `model.pth`: Eğitilmiş modelin ağırlıkları.
-- `train_model`: Modeli eğitmek için kullanılan kod.
-- `test_model`: Modeli test etmek ve performansını ölçmek için kullanılan kod.
-- `predict`: Kullanıcıdan alınan e-posta metnini analiz ederek sınıflandırma yapan fonksiyon.
-- `confusion_matrix`: Test sonuçlarını görselleştiren karışıklık matrisi.
+## Project Contents
 
-## Kurulum
+- `model.pth`: Trained model weights.
+- `train_model`: Code for training the model.
+- `test_model`: Code for testing and evaluating the model.
+- `predict`: Function to predict whether an email is spam or not based on user input.
+- `confusion_matrix`: Visualization of test results through a confusion matrix.
 
-Bu projeyi çalıştırmak için aşağıdaki adımları takip edin:
+## Setup
 
-1. **Gereksinimleri Yükleyin:**
+To run this project, follow these steps:
 
-   Aşağıdaki komutları kullanarak gerekli Python kütüphanelerini yükleyin:
+1. **Install Requirements**:
+
+   Run the following command to install the required Python libraries:
 
    ```bash
    pip install torch torchvision transformers scikit-learn matplotlib pandas numpy
    ```
 
-2. **Veri Seti ve Modelin Yüklenmesi:**
+2. **Download Dataset and Model**:
 
-   Projede kullanılan veri setini `kaggle` üzerinden indirip kullanabilirsiniz:
+   Download the dataset from Kaggle using the following commands:
 
    ```bash
    kaggle datasets download -d devildyno/email-spam-or-not-classification
    unzip email-spam-or-not-classification.zip
    ```
 
-3. **Modelin Eğitilmesi (Opsiyonel):**
+3. **Train the Model (Optional)**:
 
-   Eğer modelinizi sıfırdan eğitmek isterseniz, `train_model` fonksiyonunu kullanarak veri setinizle modeli eğitin. Eğitilen model `model.pth` dosyasında saklanacaktır.
+   If you want to train the model from scratch, use the `train_model` function. The trained model will be saved as `model.pth`.
 
-4. **Modeli Yükleyin ve Tahmin Yapın:**
+4. **Run the Classifier**:
 
-   Projeyi çalıştırmak ve terminalden tahmin yapmak için:
+   After the model is trained and saved, run the following command to make predictions from the terminal:
 
    ```bash
-   python3 predict.py
+   python3 spam_email_classifier.py
    ```
 
-   Terminalde size bir e-posta mesajı sorulacaktır. Girilen mesaj model tarafından analiz edilecek ve sonuç olarak "Spam" veya "Not Spam" yazdırılacaktır.
+   You will be prompted to enter an email message, and the model will classify it as "Spam" or "Not Spam."
 
-## Kullanım
+## Usage
 
-1. **Eğitim**:
-   
-   Eğer modeli eğitmek isterseniz, veriyi indirdikten sonra `train_model` fonksiyonunu çalıştırarak eğitimi başlatabilirsiniz. Model 4 epoch boyunca eğitim görür ve ağırlıklar `model.pth` dosyasına kaydedilir.
+1. **Training the Model**:
 
-2. **Tahmin Yapma**:
-   
-   Eğitilmiş modeli kullanarak herhangi bir e-posta mesajını sınıflandırabilirsiniz. Projeyi çalıştırdığınızda terminalde şu komut satırını göreceksiniz:
+   To train the model, after downloading the dataset, call the `train_model` function. The model will be trained for 4 epochs, and the weights will be saved in `model.pth`.
+
+2. **Predicting Spam/Not Spam**:
+
+   To classify an email, run the classifier, and you'll see the following prompt in the terminal:
 
    ```
    Enter the message to classify: 
    ```
 
-   Buraya herhangi bir e-posta metni girip Enter'a bastığınızda model, metni analiz edip "Spam" ya da "Not Spam" sonucunu döndürecektir.
+   Enter your email content, and the model will predict whether it's **"Spam"** or **"Not Spam"**.
 
-## Örnek Kullanım
+## Example Usage
 
 ```bash
 Enter the message to classify: You have won a $1000 gift card! Click here to claim your prize.
@@ -83,14 +83,14 @@ Enter the message to classify: Meeting is scheduled for 10 AM tomorrow. Please b
 The message is: Not Spam
 ```
 
-## Modelin Performansı
+## Model Performance
 
-Modelin doğruluğu, test verisi üzerinde ölçülerek bir karışıklık matrisi ile görselleştirilmiştir. Performans sonuçları ise %90 üzerinde doğruluk ile başarılı bir şekilde sınıflandırma yapmaktadır.
+The model's performance was evaluated on a test dataset, and a confusion matrix is used to visualize the results. The model achieves over 90% accuracy in classifying emails as spam or not.
 
-## Lisans
+## License
 
-Bu proje [MIT Lisansı](https://opensource.org/licenses/MIT) ile lisanslanmıştır.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ---
 
-Bu `README.md` dosyasını projenizin GitHub deposuna ekleyerek kullanıcıların projeyi nasıl kullanabileceklerini ve nasıl çalıştığını anlatabilirsiniz.
+This `README.md` file explains the project's purpose, how it works, and how to set it up for use. You can include this in your GitHub repository to guide users.
