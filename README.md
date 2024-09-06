@@ -1,6 +1,4 @@
-İşte projeniz için bir örnek `README.md` dosyası:
 
----
 
 # Spam Email Classifier
 
